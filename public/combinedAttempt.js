@@ -5,10 +5,10 @@ let conversation = [{
 
 async function callOpenRouter(input) {
   try {
-      const response = await fetch("https://75c6-160-19-5-17.ngrok-free.app/api/chat", {
+      const response = await fetch("http://127.0.0.1:5000/api/chat", {
           method: "POST",
           headers: {
-              "Authorization": "Bearer", // API key goes here, set up env
+              "Authorization": "Bearer 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",
               "HTTP-Referer": "<YOUR_SITE_URL>", // Optional
               "X-Title": "<YOUR_SITE_NAME>", // Optional
               "Content-Type": "application/json"
