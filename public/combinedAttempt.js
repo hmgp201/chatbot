@@ -8,9 +8,9 @@ async function callOpenRouter(input) {
       const response = await fetch("http://127.0.0.1:5000/api/chat", {
           method: "POST",
           headers: {
-              "Authorization": "Bearer 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", //add API
-              "HTTP-Referer": "<YOUR_SITE_URL>", // Optional
-              "X-Title": "<YOUR_SITE_NAME>", // Optional
+              "Authorization": "Bearer", //add API with env when figured out
+              "HTTP-Referer": "<YOUR_SITE_URL>", 
+              "X-Title": "<YOUR_SITE_NAME>", 
               "Content-Type": "application/json"
           },
           body: JSON.stringify({
@@ -89,28 +89,26 @@ const addSentence = (words) => {
   const lastChild = chatContainer.lastElementChild;
   let isSameSender = false;
 
-  // Check if last message is from the same sender
+  
   if (
     lastChild &&
     lastChild.classList.contains("outgoing-chats") &&
     lastChild.querySelector("p")
   ) {
-    // If last message is from the same sender, treat it as a multi-part message
+    
     const lastP = lastChild.querySelector("p");
     if (lastP && !lastP.classList.contains("multi-msg")) {
-      // Apply "multi-msg" to the last p element if it is not already
+      
       lastP.classList.add("multi-msg");
     }
     isSameSender = true;
   }
 
   const newP = document.createElement("p");
-  newP.innerHTML = words; // Use the dynamic input value
+  newP.innerHTML = words; 
 
-  // Only add "multi-msg" class if the last message was from the same sender
   if (isSameSender) {
     newP.classList.add("multi-msg");
-    // Insert before the span
     const span = lastChild.querySelector("span");
     lastChild.querySelector(".outgoing-chats-msg").insertBefore(newP, span);
     const forHistory = createMessageHistoryUser(newP.innerHTML);
@@ -119,9 +117,6 @@ const addSentence = (words) => {
     console.log(messageToAnswer);
     console.log(forHistory)
   } else {
-    // Otherwise, create a new message bubble with no "multi-msg"
-
-    // Append the new message bubble
 
     const newSpan1 = document.createElement("span");
     const now = new Date();
@@ -141,7 +136,7 @@ const addSentence = (words) => {
     }
     newSpan1.classList.add("time");
     newSpan1.innerHTML = formatDate(now);
-    newOutgoingChatsMessage.appendChild(newP); //
+    newOutgoingChatsMessage.appendChild(newP); 
     createMessageHistoryUser(newP.innerHTML)
     messageToAnswer = newP.innerHTML;
     console.log(conversation);
@@ -170,18 +165,18 @@ const addResponse = (words) => {
   newReceivedChats.appendChild(newReceivedMessage);
 
   const newReceivedMsgInbox = document.createElement("div");
-  newReceivedMsgInbox.classList.add("received-msg-inbox"); // ✅ FIXED CLASS NAME
+  newReceivedMsgInbox.classList.add("received-msg-inbox");
   newReceivedMessage.appendChild(newReceivedMsgInbox);
 
   const newP1 = document.createElement("p");
   newP1.classList.add('gen-response')
   newP1.innerHTML = words;
 
-  // Append the new message first
+ 
   const targetLoader = document.querySelector(".your-class");
   chatContainer.appendChild(newReceivedChats);
 
-  // Now get the actual last message before this one
+
   const lastChild1 = chatContainer.lastElementChild?.previousElementSibling;
   let isSameSender1 = false;
 
@@ -204,11 +199,11 @@ const addResponse = (words) => {
     if (span1) {
       lastChild1
         .querySelector(".received-msg-inbox")
-        .insertBefore(newP1, span1); // ✅ FIXED CLASS NAME
+        .insertBefore(newP1, span1); 
     } else {
-      lastChild1.querySelector(".received-msg-inbox").appendChild(newP1); // ✅ FIXED CLASS NAME
+      lastChild1.querySelector(".received-msg-inbox").appendChild(newP1); 
     }
-    chatContainer.removeChild(newReceivedChats); // Remove extra div if message is merged
+    chatContainer.removeChild(newReceivedChats); 
   } else {
     const newSpan = document.createElement("span");
     const now = new Date();
@@ -246,7 +241,7 @@ sendButton.addEventListener("click", () => {
     addSentence(inputValue);
     sendButton1.click();
   }
-  input.value = ""; // Clear the input field
+  input.value = ""; 
 });
 
 input.addEventListener("keydown", (event) => {

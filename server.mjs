@@ -1,24 +1,24 @@
 import express from "express";
 import cors from "cors";
-import fetch from "node-fetch"; // Ensure this is properly installed
+import fetch from "node-fetch"; 
 
 const app = express();
 
-// Enable CORS
+
 app.use(cors());
 app.use(express.json());
 
-// Serve static files from the "public" directory
+
 app.use(express.static("public"));
 
-// API Route
+
 app.post("/api/chat", async (req, res) => {
     console.log("Received request");
     try {
         const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
             method: "POST",
             headers: {
-                "Authorization": `Bearer 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`, // Use env variable
+                "Authorization": `Bearer`, // removed API coz I need to figure out env
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(req.body)
