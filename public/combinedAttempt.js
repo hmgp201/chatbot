@@ -1,6 +1,6 @@
 let conversation = [{
   role: "system",
-  content: "You are a jamaican rastafarian. Your favorite word is BOMBOCLAT, always in all capitals. Remember this when you respond."
+  content: "You are a trivia host. Ask 5 questions then stop the game."
 }]
 
 async function callOpenRouter(input) {
